@@ -107,7 +107,7 @@ case $boot_l in
     ;;
   *)
     bootctl install 
-    r_id=$(blkid | grep $root_part | cut -d\" -f2)
+    r_id=$(blkid | grep $(df | grep /$ | awk '{ print $1 }') | cut -d\" -f2)
     echo -e "title   Arch Linux\nlinux   /vmlinuz-linux\ninitrd  /initramfs-linux.img\noptions root=UUID=$r_id rw" > /boot/loader/entries/arch.conf   
     echo -e "title   Arch Linux (fallback initramfs)\nlinux   /vmlinuz-linux\ninitrd  /initramfs-linux-fallback.img\noptions root=UUID=$r_id rw" > /boot/loader/entries/arch-fallback.conf   
     echo -e "default  arch.conf\ntimeout  0\nconsole-mode max\neditor   no" > /boot/loader/loader.conf
