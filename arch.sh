@@ -123,7 +123,7 @@ esac
 pacman -S zsh
 chsh -s /bin/zsh $user
 
-sed -ne "$(grep -in '3 begins' arch.sh | cut -d\: -f1 | tail -n1),\$p" < /part2.sh > /home/$user/part3.sh
+sed -ne "$(grep -in '3 begins' /part2.sh | cut -d\: -f1 | tail -n1),\$p" < /part2.sh > /home/$user/part3.sh
 
 echo "After reboot login as $user and execute [bash part3.sh]"
 
