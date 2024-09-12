@@ -84,6 +84,17 @@ echo $h_name > /etc/hostname
 echo -e "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\tlocalhost.localdomain\t$h_name" >> /etc/hosts
 echo "Setting up password for root user"
 passwd 
+
+read -p "Add user [y/n]: " yn3
+if [ $yn3 == y ]
+then
+  read -p "Username: " user 
+  useradd -m -G wheel -s /bin/bash $user
+  echo "Setting password for $user"
+  passwd $user
+  echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo
+fi
+
 systemctl enable NetworkManager 
 
 echo "Setting up bootloader"
@@ -103,7 +114,7 @@ case $boot_l in
     ;;
 esac
 
-exit
+exit 0
 
 # PART 2 Ends 
 
