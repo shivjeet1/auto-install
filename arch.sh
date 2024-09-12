@@ -53,7 +53,7 @@ then
 fi
 
 echo "Installing packages."
-pacstrap -i /mnt base linux linux-firmware base-devel $boot_l efibootmgr openssh neovim networkmanager git
+pacstrap -i /mnt base linux linux-firmware $boot_l efibootmgr neovim networkmanager
 
 echo "Generating fstab and storing it."
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -115,7 +115,14 @@ case $boot_l in
     ;;
 esac
 
-exit 0
+pacman -S zsh
+chsh -s /bin/zsh $user
+
+sed -ne "$(grep -in '3 begins' arch.sh | cut -d\: -f1 | tail -n1),\$p" < /part2.sh > /home/$user/part3.sh
+
+echo "After reboot login as $user and execute [bash part3.sh]"
+
+sleep 4 && exit 0
 
 # PART 2 Ends 
 
@@ -123,3 +130,49 @@ exit 0
 
 # PART 3 Begins
 
+echo "Proceeding for post install."
+sleep 2 
+echo "Installing Packages."
+sudo pacman --noconfirm -S base-devel git libx11 libxft firefox sxiv xclip xsel xf86-input-synaptics \
+  qrencode xf86-video-intel xorg-server xorg-xinit xwallpaper mpv ranger ufw vnstat \
+  libnotify zsh-completions zsh-syntax-highlighting pipewire pipewire-audio pipewire-pulse\
+  npm nodejs bluez bluez-utils brightnessctl cmake fzf maim man-db man-pages mlocate mpc \
+  htop dunst aria2 mpd ncmpcpp tmux noto-fonts-emoji picom python python-pip python-pywal \
+  python-setuptools qbittorrent telegram-desktop ttf-jetbrains-mono ttf-nerd-fonts-symbols-common \
+  ttf-nerd-fonts-symbols-mono ueberzug usbutils virtualbox virtualbox-guest-utils wget yt-dlp\
+  zathura zathura-pdf-mupdf xorg-xrandr unzip openssh
+
+echo "Setting up dots"
+git clone https://github.com/0xguava/dotfiles.git .dotfiles
+/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME checkout
+
+echo "Configuring stuff."
+source $HOME/.zprofile
+
+wal -s -i $HOME/.local/bin/wallhaven-lqlygq.png  > /dev/null
+wal-telegram -w -g > /dev/null
+
+sed '/urg/d' -i $XDG_CACHE_HOME/wal/colors-wal-dwm.h
+sed '31s/0/256/' -i $XDG_CACHE_HOME/wal/colors-wal-st.h
+sed '24s/"[^"]*"/"#000000"/' -i $XDG_CACHE_HOME/wal/colors-wal-st.h
+
+sed "s/.*foreground.*/$(grep foreground $XDG_CACHE_HOME/wal/colors.Xresources | head -n 1 | sed s/\*/Sxiv\./g)/" -i $XRESOURCES
+sed "s/.*background.*/$(grep background $XDG_CACHE_HOME/wal/colors.Xresources | head -n 1 | sed s/\*/Sxiv\./g)/" -i $XRESOURCES 
+
+xrdb $XRESOURCES
+
+echo "Setting up DWM"
+mkdir -p .local/src
+git clone https://github.com/0xguava/dwm.git $HOME/.local/src/dwm
+git clone https://github.com/0xguava/st.git $HOME/.local/src/st
+git clone https://github.com/0xguava/dmenu.git $HOME/.local/src/dmenu
+git clone https://github.com/0xguava/dwmblocks.git $HOME/.local/src/dwmblocks
+cd $HOME/.local/src/dwm; sudo make clean install
+cd $HOME/.local/src/st; sudo make clean install
+cd $HOME/.local/src/dmenu; sudo make clean install
+cd $HOME/.local/src/dwmblocks; sudo make clean install || sudo make install
+cd
+
+# PART 3 Ends 
+
+#===========================================================================================
