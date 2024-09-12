@@ -60,9 +60,14 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 sed -ne  "$(grep -in '2 begins' arch.sh | cut -d\: -f1),\$p" < arch.sh > /mnt/part2.sh
 
-echo "Execute part2.sh manually [bash part2.sh]" 
+echo "Execute [bash part2.sh]" 
 
 arch-chroot /mnt
+
+echo "Umounting."
+umount -R /mnt 
+
+reboot
 
 # PART 1 Ends 
 
@@ -98,7 +103,6 @@ case $boot_l in
     ;;
 esac
 
-echo "Execute [umount -R /mnt] & Reboot."
 exit
 
 # PART 2 Ends 
