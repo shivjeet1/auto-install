@@ -126,8 +126,9 @@ chsh -s /bin/zsh $user
 sed -ne "$(grep -in '3 begins' /part2.sh | cut -d\: -f1 | tail -n1),\$p" < /part2.sh > /home/$user/part3.sh
 
 echo "After reboot login as $user and execute [bash part3.sh]"
+echo "Now exit or ^d"
 
-sleep 4 && exit 0
+sleep 4 && exit
 
 # PART 2 Ends 
 
