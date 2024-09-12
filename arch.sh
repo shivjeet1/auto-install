@@ -102,12 +102,13 @@ echo "Setting up bootloader"
 case $boot_l in 
   grub)
     sed -i /etc/default/grub '/PROBER\=/s/\#//'
+    efi_part=$(df | grep /boot | awk '{ print $1 }')
     grub-install ${efi_part::-1}
     grub-mkconfig -o /boot/grub/grub.cfg
     ;;
   *)
     bootctl install 
-    r_id=$(blkid | grep $(df | grep /$ | awk '{ print $1 }') | cut -d\" -f2)
+    r_id=$(blkid | grep $(df | grep /$ | awk '{ print$1 }') | cut -d\" -f2)
     echo -e "title   Arch Linux\nlinux   /vmlinuz-linux\ninitrd  /initramfs-linux.img\noptions root=UUID=$r_id rw" > /boot/loader/entries/arch.conf   
     echo -e "title   Arch Linux (fallback initramfs)\nlinux   /vmlinuz-linux\ninitrd  /initramfs-linux-fallback.img\noptions root=UUID=$r_id rw" > /boot/loader/entries/arch-fallback.conf   
     echo -e "default  arch.conf\ntimeout  0\nconsole-mode max\neditor   no" > /boot/loader/loader.conf
