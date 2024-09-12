@@ -58,7 +58,11 @@ pacstrap -i /mnt base linux linux-firmware base-devel $boot_l efibootmgr openssh
 echo "Generating fstab and storing it."
 genfstab -U /mnt >> /mnt/etc/fstab
 
+sed -ne  "$(grep -in '2 begins' arch.sh | cut -d\: -f1),\$p" < arch.sh > /mnt/part2.sh
+
 echo "Execute part2.sh manually [bash part2.sh]" 
+
+arch-chroot /mnt
 
 # PART 1 Ends 
 
