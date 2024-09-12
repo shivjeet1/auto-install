@@ -64,10 +64,10 @@ echo "Execute [bash part2.sh]"
 
 arch-chroot /mnt
 
-echo "Umounting."
+echo "Unmounting."
 umount -R /mnt 
 
-echo lolololo && exit 0 
+reboot && exit 0 
 
 # PART 1 Ends 
 
@@ -76,12 +76,17 @@ echo lolololo && exit 0
 # PART 2 Begins
 
 echo "Setting up"
+
 echo "LANG=en_IN.UTF-8" > /etc/locale.conf
+
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 hwclock --systohc
+
 read -p "Enter hostname: " h_name
 echo $h_name > /etc/hostname
+
 echo -e "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\tlocalhost.localdomain\t$h_name" >> /etc/hosts
+
 echo "Setting up password for root user"
 passwd 
 
@@ -162,7 +167,7 @@ sed "s/.*background.*/$(grep background $XDG_CACHE_HOME/wal/colors.Xresources | 
 xrdb $XRESOURCES
 
 echo "Setting up DWM"
-mkdir -p .local/src
+mkdir -p $HOME/.local/src
 git clone https://github.com/0xguava/dwm.git $HOME/.local/src/dwm
 git clone https://github.com/0xguava/st.git $HOME/.local/src/st
 git clone https://github.com/0xguava/dmenu.git $HOME/.local/src/dmenu
@@ -171,7 +176,20 @@ cd $HOME/.local/src/dwm; sudo make clean install
 cd $HOME/.local/src/st; sudo make clean install
 cd $HOME/.local/src/dmenu; sudo make clean install
 cd $HOME/.local/src/dwmblocks; sudo make clean install || sudo make install
-cd
+
+[ -d /etc/X11/xorg.conf.d ] || sudo mkdir -p /etc/X11/xorg.conf.d
+sudo cp -r /usr/share/X11/xorg.conf.d/70-synaptics.conf /etc/X11/xorg.conf.d/.
+sudo echo "#Adi's config for touchpad
+section "InputClass"
+        Identifier "touchpad"
+        Driver "synaptics"
+        MatchIsTouchpad "on"
+                Option "TapButton1" "1"
+                Option "TapButton2" "3"
+                Option "VertScrollDelta" "-111"
+EndSection" >> /etc/X11/xorg.conf.d/70-synaptics.conf 
+
+
 
 # PART 3 Ends 
 
