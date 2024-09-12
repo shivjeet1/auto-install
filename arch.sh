@@ -53,7 +53,7 @@ then
 fi
 
 echo "Installing packages."
-pacstrap -i /mnt base linux linux-firmware $boot_l efibootmgr neovim networkmanager || exit 1
+pacstrap -i /mnt base linux linux-firmware $boot_l efibootmgr neovim networkmanager sudo || exit 1
 
 echo "Generating fstab and storing it."
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -103,7 +103,7 @@ fi
 systemctl enable NetworkManager 
 
 echo "Setting up bootloader"
-[ -n "$(pacman -Qs grub)"] && boot_l=grub
+[ -n "$(pacman -Qs grub)" ] && boot_l=grub
 case $boot_l in 
   grub)
     sed -i /etc/default/grub '/PROBER\=/s/\#//'
