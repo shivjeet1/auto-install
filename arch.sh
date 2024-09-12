@@ -58,7 +58,7 @@ pacstrap -i /mnt base linux linux-firmware base-devel $boot_l efibootmgr openssh
 echo "Generating fstab and storing it."
 genfstab -U /mnt >> /mnt/etc/fstab
 
-sed -ne  "$(grep -in '2 begins' arch.sh | cut -d\: -f1),\$p" < arch.sh > /mnt/part2.sh
+sed -ne "$(grep -in '2 begins' arch.sh | cut -d\: -f1 | tail -n1),\$p" < arch.sh > /mnt/part2.sh
 
 echo "Execute [bash part2.sh]" 
 
@@ -67,7 +67,7 @@ arch-chroot /mnt
 echo "Umounting."
 umount -R /mnt 
 
-reboot
+echo lolololo && exit 0 
 
 # PART 1 Ends 
 
@@ -98,7 +98,7 @@ fi
 systemctl enable NetworkManager 
 
 echo "Setting up bootloader"
-
+[ -n "$(pacman -Qs grub)"] && boot_l=grub
 case $boot_l in 
   grub)
     sed -i /etc/default/grub '/PROBER\=/s/\#//'
