@@ -53,12 +53,12 @@ then
 fi
 
 echo "Installing packages."
-pacstrap -i /mnt base linux linux-firmware $boot_l efibootmgr neovim networkmanager
+pacstrap -i /mnt base linux linux-firmware $boot_l efibootmgr neovim networkmanager || exit 1
 
 echo "Generating fstab and storing it."
 genfstab -U /mnt >> /mnt/etc/fstab
 
-sed -ne "$(grep -in '2 begins' arch.sh | cut -d\: -f1 | tail -n1),\$p" < arch.sh > /mnt/part2.sh
+sed -ne "$(grep -in '2 begins' arch.sh | cut -d\: -f1 | tail -n1),\$p" < $PWD/auto-install/arch.sh > /mnt/part2.sh
 
 echo "Execute [bash part2.sh]" 
 
