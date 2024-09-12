@@ -126,7 +126,7 @@ chsh -s /bin/zsh $user
 sed -ne "$(grep -in '3 begins' /part2.sh | cut -d\: -f1 | tail -n1),\$p" < /part2.sh > /home/$user/part3.sh
 
 echo "After reboot login as $user and execute [bash part3.sh]"
-echo "Now exit or ^d"
+echo "exit or ^d"
 
 sleep 4 && exit
 
@@ -146,7 +146,7 @@ sudo pacman --noconfirm -S base-devel git libx11 libxft firefox sxiv xclip xsel 
   htop dunst aria2 mpd ncmpcpp tmux noto-fonts-emoji picom python python-pip python-pywal \
   python-setuptools qbittorrent telegram-desktop ttf-jetbrains-mono ttf-nerd-fonts-symbols-common \
   ttf-nerd-fonts-symbols-mono ueberzug usbutils virtualbox virtualbox-guest-utils wget yt-dlp\
-  zathura zathura-pdf-mupdf xorg-xrandr unzip openssh
+  zathura zathura-pdf-mupdf xorg-xrandr unzip openssh || exit 1
 
 echo "Setting up dots"
 git clone https://github.com/0xguava/dotfiles.git .dotfiles
