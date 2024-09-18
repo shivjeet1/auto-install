@@ -98,7 +98,7 @@ then
   echo "Setting password for $user"
   passwd $user
   echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo
-  pacman -S zsh
+  pacman --noconfirm -S zsh
   chsh -s /bin/zsh $user
 fi
 
@@ -182,16 +182,21 @@ cd $HOME/.local/src/dwmblocks; sudo make clean install || sudo make install
 [ -d /etc/X11/xorg.conf.d ] || sudo mkdir -p /etc/X11/xorg.conf.d
 sudo cp -r /usr/share/X11/xorg.conf.d/70-synaptics.conf /etc/X11/xorg.conf.d/.
 echo "#Adi's config for touchpad
-section "InputClass"
-        Identifier "touchpad"
-        Driver "synaptics"
-        MatchIsTouchpad "on"
-                Option "TapButton1" "1"
-                Option "TapButton2" "3"
-                Option "VertScrollDelta" "-111"
+section \"InputClass\"
+        Identifier \"touchpad\"
+        Driver \"synaptics\"
+        MatchIsTouchpad \"on\"
+                Option \"TapButton1\" \"1\"
+                Option \"TapButton2\" \"3\"
+                Option \"VertScrollDelta\" \"-111\"
 EndSection" | sudo tee -a /etc/X11/xorg.conf.d/70-synaptics.conf 
 
+echo "Wrapping up"
+sudo rm -rf /part2.sh 
+sudo rm -rf $HOME/.bash*
+sudo rm -rf $HOME/part3.sh
 
+echo "Relogin to execute [startx] to see MAGIC"
 
 # PART 3 Ends 
 
