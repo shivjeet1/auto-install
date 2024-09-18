@@ -149,14 +149,14 @@ sudo pacman --noconfirm -S base-devel git libx11 libxft firefox sxiv xclip xsel 
   zathura zathura-pdf-mupdf xorg-xrandr unzip openssh || exit 1
 
 echo "Setting up dots"
-git clone https://github.com/0xguava/dotfiles.git .dotfiles
-/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME checkout
+git clone --bare https://github.com/0xguava/dotfiles.git $HOME/.dotfiles
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout
 
 echo "Configuring stuff."
+export DISPLAY=3
 source $HOME/.zprofile
 
-wal -s -i $HOME/.local/bin/wallhaven-lqlygq.png  > /dev/null
-wal-telegram -w -g > /dev/null
+wal -s -i $HOME/.local/bin/wallhaven-lqlygq.png  
 
 sed '/urg/d' -i $XDG_CACHE_HOME/wal/colors-wal-dwm.h
 sed '31s/0/256/' -i $XDG_CACHE_HOME/wal/colors-wal-st.h
@@ -180,7 +180,7 @@ cd $HOME/.local/src/dwmblocks; sudo make clean install || sudo make install
 
 [ -d /etc/X11/xorg.conf.d ] || sudo mkdir -p /etc/X11/xorg.conf.d
 sudo cp -r /usr/share/X11/xorg.conf.d/70-synaptics.conf /etc/X11/xorg.conf.d/.
-sudo echo "#Adi's config for touchpad
+echo "#Adi's config for touchpad
 section "InputClass"
         Identifier "touchpad"
         Driver "synaptics"
@@ -188,7 +188,7 @@ section "InputClass"
                 Option "TapButton1" "1"
                 Option "TapButton2" "3"
                 Option "VertScrollDelta" "-111"
-EndSection" >> /etc/X11/xorg.conf.d/70-synaptics.conf 
+EndSection" | sudo tee -a /etc/X11/xorg.conf.d/70-synaptics.conf 
 
 
 
