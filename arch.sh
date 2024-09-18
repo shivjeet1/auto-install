@@ -98,6 +98,8 @@ then
   echo "Setting password for $user"
   passwd $user
   echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo
+  pacman -S zsh
+  chsh -s /bin/zsh $user
 fi
 
 systemctl enable NetworkManager 
@@ -120,10 +122,9 @@ case $boot_l in
     ;;
 esac
 
-pacman -S zsh
-chsh -s /bin/zsh $user
+[ -z $user ] && pth='/root' || pth="/home/$user"
 
-sed -ne "$(grep -in '3 begins' /part2.sh | cut -d\: -f1 | tail -n1),\$p" < /part2.sh > /home/$user/part3.sh
+sed -ne "$(grep -in '3 begins' $PWD/part2.sh | cut -d\: -f1 | tail -n1),\$p" < $PWD/part2.sh > $pth/part3.sh
 
 echo "After reboot login as $user and execute [bash part3.sh]"
 echo "exit or ^d"
@@ -154,7 +155,7 @@ git clone --bare https://github.com/0xguava/dotfiles.git $HOME/.dotfiles
 
 echo "Configuring stuff."
 export DISPLAY=3
-source $HOME/.zprofile
+source $HOME/.zprofile 2> /dev/null
 
 wal -s -i $HOME/.local/bin/wallhaven-lqlygq.png  
 
