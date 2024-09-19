@@ -129,7 +129,7 @@ sed -ne "$(grep -in '3 begins' $PWD/part2.sh | cut -d\: -f1 | tail -n1),\$p" < $
 echo "After reboot login as $user and execute [bash part3.sh]"
 echo "exit or ^d"
 
-sleep 4 && exit
+exit
 
 # PART 2 Ends 
 
