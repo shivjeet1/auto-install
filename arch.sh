@@ -166,17 +166,33 @@ sed '24s/"[^"]*"/"#000000"/' -i $XDG_CACHE_HOME/wal/colors-wal-st.h
 sed "s/.*foreground.*/$(grep foreground $XDG_CACHE_HOME/wal/colors.Xresources | head -n 1 | sed s/\*/Sxiv\./g)/" -i $XRESOURCES
 sed "s/.*background.*/$(grep background $XDG_CACHE_HOME/wal/colors.Xresources | head -n 1 | sed s/\*/Sxiv\./g)/" -i $XRESOURCES 
 
-xrdb $XRESOURCES
-
 echo "Setting up DWM"
 mkdir -p $HOME/.local/src
 git clone https://github.com/0xguava/dwm.git $HOME/.local/src/dwm
 git clone https://github.com/0xguava/st.git $HOME/.local/src/st
 git clone https://github.com/0xguava/dmenu.git $HOME/.local/src/dmenu
 git clone https://github.com/0xguava/dwmblocks.git $HOME/.local/src/dwmblocks
-cd $HOME/.local/src/dwm; sudo make clean install
-cd $HOME/.local/src/st; sudo make clean install
-cd $HOME/.local/src/dmenu; sudo make clean install
+
+user_correction(){
+sed -i "s/adi/$USER/" $HOME/.local/src/dwm/config.def.h 
+sed -i "s/adi/$USER/" $HOME/.local/src/st/config.def.h 
+sed -i "s/adi/$USER/" $HOME/.local/src/dmenu/config.def.h 
+cd $HOME/.local/src/dwm; cp config.def.h config.h; sudo make clean install
+cd $HOME/.local/src/st; cp config.def.h config.h; sudo make clean install
+cd $HOME/.local/src/dmenu; cp config.def.h config.h; sudo make clean install
+}
+
+case $USER in 
+  adi)
+    cd $HOME/.local/src/dwm; sudo make clean install
+    cd $HOME/.local/src/st; sudo make clean install
+    cd $HOME/.local/src/dmenu; sudo make clean install
+    ;;
+  *)
+    user_correction
+    ;;
+esac 
+
 cd $HOME/.local/src/dwmblocks; sudo make clean install || sudo make install
 
 [ -d /etc/X11/xorg.conf.d ] || sudo mkdir -p /etc/X11/xorg.conf.d
