@@ -212,7 +212,7 @@ sudo rm -rf /part2.sh
 sudo rm -rf $HOME/.bash*
 sudo rm -rf $HOME/part3.sh
 
-echo "Relogin to execute [startx] to see MAGIC"
+echo "Relogin or execute [startx] to see MAGIC"
 
 # PART 3 Ends 
 
