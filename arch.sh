@@ -136,6 +136,7 @@ exit
 #===========================================================================================
 
 # PART 3 Begins
+# Above code is fully tested and below code is untested try it at your own risk.
 
 echo "Proceeding for post install."
 sleep 2 
