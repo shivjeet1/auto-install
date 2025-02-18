@@ -15,15 +15,12 @@ read -p "Root Partition: " proot
 echo "Formatting Root Partition to ext4"
 mkfs.ext4 $proot
 
-read -p "Do you need SWAP ?" syn
+read -p "Do you need SWAP ?[y/n]" syn
 if[ $syn == "y" ]
 then
 	read -p "SWAP Partition: " swapp
 	echo "Creating SWAP"
 	mkswap $swapp
-fi
-if[ $syn == "y"]
-then
 	echo "Mounting SWAP"
 	swapon $swapp
 fi
