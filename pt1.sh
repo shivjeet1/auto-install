@@ -1,7 +1,7 @@
 #!/bin/sh
 echo -e "Starting Installation Script by @shivjeet1"
 read -p "\nNote: Have you partitioned the DISK ? [y/n]" yn
-if [$yn != "y"]
+if [ $yn != "y"]
 then
 	echo -e "Perform partitioning with [fdisk/gparted] then run this script again."
 	exit 1
@@ -16,7 +16,7 @@ echo "Formatting Root Partition to ext4"
 mkfs.ext4 $proot
 
 read -p "Do you need SWAP ?[y/n]" syn
-if[ $syn == "y" ]
+if [ $syn == "y" ]
 then
 	read -p "SWAP Partition: " swapp
 	echo "Creating SWAP"
