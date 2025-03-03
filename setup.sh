@@ -1,6 +1,6 @@
 echo "Proceeding with post installation"
 echo "Installing Packages."
-sudo pacman --noconfirm -S base-devel git libx11 libxft xf86-input-synaptics xf86-video-intel xorg-server xorg-xinit xwallpaper zsh-completions zsh-syntax-highlighting pipewire pipewire-audio pipewire-pulse picom python python-pip python-pywal ttf-nerd-fonts-symbols-mono ueberzug usbutils xorg-xrandr unzip openssh brightnessctl || exit 1
+sudo pacman --noconfirm -S base-devel git libx11 libxft xf86-input-synaptics xf86-video-intel xorg-server xorg-xinit xwallpaper bluez python-setuptools cmake xsel fzf mpv ranger zsh-completions zsh-syntax-highlighting pipewire pipewire-audio pipewire-pulse picom python python-pip python-pywal ttf-nerd-fonts-symbols-mono ueberzug usbutils xorg-xrandr unzip openssh brightnessctl || exit 1
 
 echo "Setting up dotfiles"
 sleep 2
