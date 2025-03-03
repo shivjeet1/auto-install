@@ -14,7 +14,7 @@ echo "."
 export DISPLAY=3
 
 source $HOME/.zprofile 2> /dev/null
-wall -s -i $HOME/auto-install/sung-jinwoo-amoled-5120x2880-15859.jpg
+wal -s -i $HOME/auto-install/sung-jinwoo-amoled-5120x2880-15859.jpg
 sed '/urg/d' -i $XDG_CACHE_HOME/wal/colors-wal-dwm.h
 sed '31s/0/256/' -i $XDG_CACHE_HOME/wal/colors-wal-st.h
 
