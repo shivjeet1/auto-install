@@ -43,7 +43,18 @@ pacstrap -K /mnt base linux linux-firmware grub efibootmgr neovim networkmanager
 echo "Generating fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# Chroot and execute commands
+# Prompt for Root password
+echo "Set the root password"
+arch-chroot /mnt passwd
+
+# Prompt for new user
+read -p "Enter new username: " user
+arch-chroot /mnt useradd -m -G wheel -s /bin/bash "$user"
+
+echo "Set password for $user"
+arch-chroot /mnt passwd "$user"
+
+# Chroot and execute system configuration
 arch-chroot /mnt /bin/bash <<EOF
 
 # Set up locale
@@ -53,17 +64,9 @@ echo "LANG=en_IN.UTF-8" > /etc/locale.conf
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 hwclock --systohc
 
-# Set root password
-echo -e "root\nroot" | passwd
-
-# Create new user
-read -p "Creating New user: " user
-useradd -m -G wheel -s /bin/bash "\$user"
-echo -e "password\npassword" | passwd "\$user"
-
 # Grant sudo privileges
 echo '%wheel ALL=(ALL:ALL) ALL' | EDITOR='tee -a' visudo
-chsh -s /bin/zsh "\$user"
+chsh -s /bin/zsh "$user"
 
 # Set hostname
 read -p "Enter HostName: " hname
