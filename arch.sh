@@ -158,7 +158,7 @@ echo "Configuring stuff."
 export DISPLAY=3
 source $HOME/.zprofile 2> /dev/null
 
-wal -s -i $HOME/.local/bin/wallhaven-lqlygq.png  
+wal -s -i $HOME/.local/share/inff/wallhaven-lqlygq.png  
 
 # sed '/urg/d' -i $XDG_CACHE_HOME/wal/colors-wal-dwm.h
 # sed '31s/0/256/' -i $XDG_CACHE_HOME/wal/colors-wal-st.h
