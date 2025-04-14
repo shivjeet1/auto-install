@@ -1,6 +1,6 @@
 {
 	"hostname": "",
-	"add-user": "",
+	"adduser": "",
 	"credentials": {
 		"username": "",
 		"password": "",
