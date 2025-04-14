@@ -4,6 +4,6 @@
 	"credentials": {
 		"username": "",
 		"password": "",
-		"root-password": ""
+		"rootpassword": ""
 	}
 }
