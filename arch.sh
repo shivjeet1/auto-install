@@ -5,6 +5,7 @@
 # PART 1 Begins
 
 set -e
+# shopt -s nullglob
 config=$PWD/config.json
 
 # echo "NOTE: Partioning should be done before proceeding."
@@ -15,13 +16,13 @@ config=$PWD/config.json
 #   exit 1
 # fi
 
-disk="/dev/$(lsblk -dn -o NAME /dev/(*d[a-z]|nvme[0-9]n[0-9]) | head -n1)"
-disk_type=$(lsblk -dn -o NAME /dev/(*d[a-z]|nvme[0-9]n[0-9]) | head -n1)
-disk_size=$(lsblk -dn -o SIZE /dev/(*d[a-z]|nvme[0-9]n[0-9]) | head -n1)
+disk=/dev/$(lsblk -dn -o NAME /dev/{*d[a-z],nvme[0-9]n[0-9]} 2> /dev/null | head -n1)
+disk_type=$(lsblk -dn -o NAME /dev/{*d[a-z],nvme[0-9]n[0-9]} 2> /dev/null | head -n1)
+disk_size=$(lsblk -dn -o SIZE /dev/{*d[a-z],nvme[0-9]n[0-9]} 2> /dev/null | head -n1)
 
-parted $disk mklabel gpt
-parted $disk -a opt mkpart efi fat32 1MiB 512MiB
-parted $disk -a opt mkpart rootfs ext4 513MiB 100% 
+parted -s $disk mklabel gpt
+parted -s $disk -a opt mkpart efi fat32 1MiB 512MiB
+parted -s $disk -a opt mkpart rootfs ext4 513MiB 100% 
 
 if [[ "$disk_type" =~ nvme* ]]; then
   efi_part=${disk}p1
