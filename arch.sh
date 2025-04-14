@@ -77,7 +77,7 @@ pacman -Sy --noconfirm archlinux-keyring jq
 
 echo "Installing packages."
 pacstrap /mnt base linux linux-firmware grub git efibootmgr neovim networkmanager sudo \
-  base-devel git mpv ranger ufw vnstat cmake fzf man-db man-pages htop unzip openssh
+  base-devel git ufw vnstat cmake fzf man-db man-pages unzip openssh
 
 
 echo "Generating fstab and storing it."
