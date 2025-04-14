@@ -5,6 +5,7 @@
 # PART 1 Begins
 
 set -e
+config=$PWD/config.json
 
 # echo "NOTE: Partioning should be done before proceeding."
 # read -p "Proceed? [y/n]: " yn
@@ -102,20 +103,23 @@ arch-chroot /mnt ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 arch-chroot /mnt hwclock --systohc
 
 # read -p "Enter hostname: " h_name
+h_name=$(jq -r '.hostname' $config)
 echo $h_name > /mnt/etc/hostname
 
 echo -e "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\tlocalhost.localdomain\t$h_name" >> /mnt/etc/hosts
 
 echo "Setting up password for root user"
-echo "root:${}" | chpasswd --root /mnt
+echo "root:$(jq -r '.credentials.rootpassword' $config)" | chpasswd --root /mnt
 
 # read -p "Add user [y/n]: " yn3
+yn3=$(jq -r '.adduser' $config)
 if [ $yn3 == y ]
 then
   # read -p "Username: " user 
+  user=$(jq -r '.credentials.username' $config)
   arch-chroot /mnt useradd -m -G wheel -s /bin/bash $user
   echo "Setting password for $user"
-  arch-chroot /mnt passwd $user
+  echo "$user:$(jq -r '.credentials.password' $config)" | chpasswd --root /mnt
   arch-chroot /mnt bash -c "echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo"
   arch-chroot /mnt pacman --noconfirm -S zsh
   arch-chroot /mnt chsh -s /bin/zsh $user
