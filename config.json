@@ -1,7 +1,9 @@
 {
-	"hostname": " "
+	"hostname": "",
+	"add-user": "",
 	"credentials": {
-		"username": ""
-		"password": ""
+		"username": "",
+		"password": "",
+		"root-password": ""
 	}
 }
