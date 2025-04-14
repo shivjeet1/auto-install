@@ -22,7 +22,7 @@ parted $disk mklabel gpt
 parted $disk -a opt mkpart efi fat32 1MiB 512MiB
 parted $disk -a opt mkpart rootfs ext4 513MiB 100% 
 
-if [[ "$disk_type" == "nvme" ]]; then
+if [[ "$disk_type" =~ nvme* ]]; then
   efi_part=${disk}p1
   root_part=${disk}p2
 else
