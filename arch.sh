@@ -72,7 +72,7 @@ echo "Mounting efi"
 # fi
 
 pacman-key --init
-pacman -Sy archlinux-keyring
+pacman -Sy archlinux-keyring jq
 
 echo "Installing packages."
 pacstrap /mnt base linux linux-firmware grub git efibootmgr neovim networkmanager sudo \
