@@ -71,7 +71,7 @@ echo "Mounting efi"
 #   echo "Mounting swap"
 #   swapon $swap_part
 # fi
-
+reflector
 pacman-key --init
 pacman -Sy --noconfirm archlinux-keyring jq
 
