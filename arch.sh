@@ -70,10 +70,13 @@ echo "Mounting efi"
 #   swapon $swap_part
 # fi
 
+pacman-key --init
 pacman -Sy archlinux-keyring git
 
 echo "Installing packages."
-pacstrap -i /mnt base linux linux-firmware $boot_l efibootmgr neovim networkmanager sudo || exit 1
+pacstrap /mnt base linux linux-firmware grub git efibootmgr neovim networkmanager sudo \
+  base-devel git mpv ranger ufw vnstat cmake fzf man-db man-pages htop aria2c unzip openssh
+
 
 echo "Generating fstab and storing it."
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -84,10 +87,6 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 # arch-chroot /mnt
 
-echo "Unmounting."
-umount -R /mnt 
-
-reboot && exit 0 
 
 # PART 1 Ends 
 
@@ -102,7 +101,7 @@ echo "LANG=en_IN.UTF-8" > /mnt/etc/locale.conf
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 arch-chroot /mnt hwclock --systohc
 
-read -p "Enter hostname: " h_name
+# read -p "Enter hostname: " h_name
 echo $h_name > /mnt/etc/hostname
 
 echo -e "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\tlocalhost.localdomain\t$h_name" >> /mnt/etc/hosts
@@ -110,10 +109,10 @@ echo -e "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\tlocalhost.localdomai
 echo "Setting up password for root user"
 arch-chroot /mnt passwd 
 
-read -p "Add user [y/n]: " yn3
+# read -p "Add user [y/n]: " yn3
 if [ $yn3 == y ]
 then
-  read -p "Username: " user 
+  # read -p "Username: " user 
   arch-chroot /mnt useradd -m -G wheel -s /bin/bash $user
   echo "Setting password for $user"
   arch-chroot /mnt passwd $user
@@ -129,7 +128,7 @@ echo "Setting up bootloader"
 # case $boot_l in 
 #   grub)
     sed -i /mnt/etc/default/grub '/PROBER\=/s/\#//'
-    efi_part=$(df | grep /mnt/boot | awk '{ print $1 }')
+    # efi_part=$(df | grep /mnt/boot | awk '{ print $1 }')
     arch-chroot /mnt grub-install ${efi_part::-1}
     arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 #     ;;
@@ -157,54 +156,48 @@ echo "Setting up bootloader"
 
 # PART 3 Begins
 
-echo "Proceeding for user's daily setup."
-sleep 2 
-echo "Installing Packages."
-arch-chroot /mnt pacman --noconfirm -S base-devel git libx11 libxft firefox sxiv xclip xsel xf86-input-synaptics \
-  xf86-video-intel xorg-server xorg-xinit xwallpaper mpv ranger ufw vnstat \
-  libnotify zsh-completions zsh-syntax-highlighting pipewire pipewire-audio pipewire-pulse\
-  npm nodejs bluez bluez-utils brightnessctl cmake fzf maim man-db man-pages mlocate mpc \
-  htop dunst aria2 mpd ncmpcpp tmux noto-fonts-emoji picom python python-pip python-pywal \
-  python-setuptools qbittorrent telegram-desktop ttf-jetbrains-mono ttf-nerd-fonts-symbols-common \
-  ttf-nerd-fonts-symbols-mono ueberzug usbutils virtualbox virtualbox-guest-utils wget yt-dlp\
-  zathura zathura-pdf-mupdf xorg-xrandr unzip openssh || exit 1
+# echo "Proceeding for user's daily setup."
+# sleep 2 
+# echo "Installing Packages."
+arch-chroot /mnt pacman --noconfirm -S base-devel git mpv ranger ufw vnstat cmake fzf man-db man-pages \
+  htop aria2c unzip openssh
 
-echo "Setting up dots"
-arch-chroot /mnt git clone --bare https://github.com/0xguava/dotfiles.git $pth/.dotfiles
-arch-chroot /mnt /usr/bin/git --git-dir=$pth/.dotfiles/ --work-tree=$pth checkout
+# echo "Setting up dots"
+# arch-chroot /mnt git clone --bare https://github.com/0xguava/dotfiles.git $pth/.dotfiles
+# arch-chroot /mnt /usr/bin/git --git-dir=$pth/.dotfiles/ --work-tree=$pth checkout
 
 # echo "Configuring stuff."
 # export DISPLAY=3
 # source $pth/.zprofile 2> /dev/null
 
-aux_pth="/$(echo $pth | cut -d \/ -f3-)"
+# aux_pth="/$(echo $pth | cut -d \/ -f3-)"
 
-arch-chroot /mnt wal -s -i $aux_pth/.local/share/inff/wallp.png  
+# arch-chroot /mnt wal -s -i $aux_pth/.local/share/inff/wallp.png  
 
-echo "Setting up DWM"
-mkdir -p $pth/.local/src
-git clone https://github.com/0xguava/dwm.git $pth/.local/src/dwm
-git clone https://github.com/0xguava/st.git $pth/.local/src/st
-git clone https://github.com/0xguava/dmenu.git $pth/.local/src/dmenu
-git clone https://github.com/0xguava/dwmblocks.git $pth/.local/src/dwmblocks
+# echo "Setting up DWM"
+# mkdir -p $pth/.local/src
+# git clone https://github.com/0xguava/dwm.git $pth/.local/src/dwm
+# git clone https://github.com/0xguava/st.git $pth/.local/src/st
+# git clone https://github.com/0xguava/dmenu.git $pth/.local/src/dmenu
+# git clone https://github.com/0xguava/dwmblocks.git $pth/.local/src/dwmblocks
 
-arch-chroot /mnt bash -c "cd $aux_pth/.local/src/dwm; sudo make clean install"
-arch-chroot /mnt bash -c "cd $aux_pth/.local/src/st; sudo make clean install"
-arch-chroot /mnt bash -c "cd $aux_pth/.local/src/dmenu; sudo make clean install"
-
-arch-chroot /mnt bash -c "cd $pth/.local/src/dwmblocks; sudo make clean install || sudo make install"
-
-[ -d /mnt/etc/X11/xorg.conf.d ] || sudo mkdir -p /mnt/etc/X11/xorg.conf.d
-sudo cp -r /mnt/usr/share/X11/xorg.conf.d/70-synaptics.conf /mnt/etc/X11/xorg.conf.d/.
-echo "#Adi's config for touchpad
-section \"InputClass\"
-        Identifier \"touchpad\"
-        Driver \"synaptics\"
-        MatchIsTouchpad \"on\"
-                Option \"TapButton1\" \"1\"
-                Option \"TapButton2\" \"3\"
-                Option \"VertScrollDelta\" \"-111\"
-EndSection" | sudo tee -a /mnt/etc/X11/xorg.conf.d/70-synaptics.conf 
+# arch-chroot /mnt bash -c "cd $aux_pth/.local/src/dwm; sudo make clean install"
+# arch-chroot /mnt bash -c "cd $aux_pth/.local/src/st; sudo make clean install"
+# arch-chroot /mnt bash -c "cd $aux_pth/.local/src/dmenu; sudo make clean install"
+#
+# arch-chroot /mnt bash -c "cd $pth/.local/src/dwmblocks; sudo make clean install || sudo make install"
+#
+# [ -d /mnt/etc/X11/xorg.conf.d ] || sudo mkdir -p /mnt/etc/X11/xorg.conf.d
+# sudo cp -r /mnt/usr/share/X11/xorg.conf.d/70-synaptics.conf /mnt/etc/X11/xorg.conf.d/.
+# echo "#Adi's config for touchpad
+# section \"InputClass\"
+#         Identifier \"touchpad\"
+#         Driver \"synaptics\"
+#         MatchIsTouchpad \"on\"
+#                 Option \"TapButton1\" \"1\"
+#                 Option \"TapButton2\" \"3\"
+#                 Option \"VertScrollDelta\" \"-111\"
+# EndSection" | sudo tee -a /mnt/etc/X11/xorg.conf.d/70-synaptics.conf 
 
 # echo "Wrapping up"
 # sudo rm -rf /part2.sh 
@@ -212,6 +205,11 @@ EndSection" | sudo tee -a /mnt/etc/X11/xorg.conf.d/70-synaptics.conf
 # sudo rm -rf $HOME/part3.sh
 
 echo "Relogin or execute [startx] to see MAGIC"
+
+echo "Unmounting."
+umount -R /mnt 
+
+reboot && exit 0 
 
 # PART 3 Ends 
 
