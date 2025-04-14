@@ -4,18 +4,36 @@
 
 # PART 1 Begins
 
-echo "NOTE: Partioning should be done before proceeding."
-read -p "Proceed? [y/n]: " yn
+set -e
 
-if [ $yn != "y" ]
-then
-  exit 1
+# echo "NOTE: Partioning should be done before proceeding."
+# read -p "Proceed? [y/n]: " yn
+
+# if [ $yn != "y" ]
+# then
+#   exit 1
+# fi
+
+disk="/dev/$(lsblk -dn -o NAME /dev/(*d[a-z]|nvme[0-9]n[0-9]) | head -n1)"
+disk_type=$(lsblk -dn -o NAME /dev/(*d[a-z]|nvme[0-9]n[0-9]) | head -n1)
+disk_size=$(lsblk -dn -o SIZE /dev/(*d[a-z]|nvme[0-9]n[0-9]) | head -n1)
+
+parted $disk mklabel gpt
+parted $disk -a opt mkpart efi fat32 1MiB 512MiB
+parted $disk -a opt mkpart rootfs ext4 513MiB 100% 
+
+if [[ "$disk_type" == "nvme" ]]; then
+  efi_part=${disk}p1
+  root_part=${disk}p2
+else
+  efi_part=${disk}1
+  root_part=${disk}2
 fi
 
 # echo -e "\n1.Grub\n2.Systemd-boot"
 # read -p "Select bootloader [1/2]: " yn2
 
-read -p "EFI partition: " efi_part
+# read -p "EFI partition: " efi_part
 echo "Formatting efi partition to fat32"
 mkfs.fat -F 32 $efi_part
 
@@ -27,7 +45,7 @@ mkfs.fat -F 32 $efi_part
 #   mkswap $swap_part
 # fi
 
-read -p "Root partition: " root_part
+# read -p "Root partition: " root_part
 echo "Formatting root partition to ext4"
 mkfs.ext4 $root_part
 
