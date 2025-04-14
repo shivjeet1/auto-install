@@ -49,7 +49,7 @@ mkfs.fat -F 32 $efi_part
 
 # read -p "Root partition: " root_part
 echo "Formatting root partition to ext4"
-mkfs.ext4 $root_part
+mkfs.ext4 -F $root_part
 
 echo "Mounting root."
 mount $root_part /mnt 
