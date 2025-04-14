@@ -71,7 +71,7 @@ echo "Mounting efi"
 # fi
 
 pacman-key --init
-pacman -Sy archlinux-keyring git
+pacman -Sy archlinux-keyring
 
 echo "Installing packages."
 pacstrap /mnt base linux linux-firmware grub git efibootmgr neovim networkmanager sudo \
@@ -107,7 +107,7 @@ echo $h_name > /mnt/etc/hostname
 echo -e "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\tlocalhost.localdomain\t$h_name" >> /mnt/etc/hosts
 
 echo "Setting up password for root user"
-arch-chroot /mnt passwd 
+echo "root:${}" | chpasswd --root /mnt
 
 # read -p "Add user [y/n]: " yn3
 if [ $yn3 == y ]
