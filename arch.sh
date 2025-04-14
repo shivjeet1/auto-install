@@ -122,8 +122,6 @@ then
   echo "Setting password for $user"
   echo "$user:$(jq -r '.credentials.password' $config)" | chpasswd --root /mnt
   arch-chroot /mnt bash -c "echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo"
-  arch-chroot /mnt pacman --noconfirm -S zsh
-  arch-chroot /mnt chsh -s /bin/zsh $user
 fi
 
 arch-chroot /mnt systemctl enable NetworkManager 
@@ -132,7 +130,7 @@ echo "Setting up bootloader"
 # [ -n "$(pacman -Qs grub)" ] && boot_l=grub
 # case $boot_l in 
 #   grub)
-    sed -i /mnt/etc/default/grub '/PROBER\=/s/\#//'
+  #  sed -i /mnt/etc/default/grub '/PROBER\=/s/\#//'
     # efi_part=$(df | grep /mnt/boot | awk '{ print $1 }')
     arch-chroot /mnt grub-install ${efi_part::-1}
     arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
@@ -146,7 +144,7 @@ echo "Setting up bootloader"
 #     ;;
 # esac
 
-[ -z $user ] && pth='/mnt/root' || pth="/mnt/home/$user"
+#[ -z $user ] && pth='/mnt/root' || pth="/mnt/home/$user"
 
 # sed -ne "$(grep -in '3 begins' $PWD/part2.sh | cut -d\: -f1 | tail -n1),\$p" < $PWD/part2.sh > $pth/part3.sh
 
@@ -164,8 +162,6 @@ echo "Setting up bootloader"
 # echo "Proceeding for user's daily setup."
 # sleep 2 
 # echo "Installing Packages."
-arch-chroot /mnt pacman --noconfirm -S base-devel git mpv ranger ufw vnstat cmake fzf man-db man-pages \
-  htop aria2c unzip openssh
 
 # echo "Setting up dots"
 # arch-chroot /mnt git clone --bare https://github.com/0xguava/dotfiles.git $pth/.dotfiles
