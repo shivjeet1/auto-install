@@ -46,6 +46,8 @@ Eg.
 
 - Simply add, commit and push `config.json`
 
+Once workflow is done you can have your **custom unattended installation iso** in releases.
+
 ---
 
 ### Contributer
