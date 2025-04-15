@@ -5,15 +5,14 @@ on:
     branches:
       - master
 
-permissions:
-  contents: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
       image: archlinux/archlinux:latest
       options: --privileged
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - run: pwd
@@ -30,3 +29,5 @@ jobs:
         if: github.ref_type == 'tag'
         with:
           files: /tmp/auto-ins/out/*.iso
+        env: 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
