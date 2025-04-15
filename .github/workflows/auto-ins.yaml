@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
@@ -24,5 +26,6 @@ jobs:
           name: unattended arch installation iso
           path: /tmp/auto-ins/out/*.iso
       - uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
         with:
           files: /tmp/auto-ins/out/*.iso
