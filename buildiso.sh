@@ -16,7 +16,7 @@ cp -r /usr/share/archiso/configs/releng/* $work_dir/.
 
 cp -r arch.sh config.json $work_dir/airootfs/root/.
 
-cat >> $work_dir/root/.zprofile << EOF
+cat >> $work_dir/airootfs/root/.zprofile << EOF
   # unattended installation begins
   bash arch.sh
 EOF
