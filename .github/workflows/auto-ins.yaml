@@ -23,3 +23,6 @@ jobs:
         with:
           name: unattended arch installation iso
           path: /tmp/auto-ins/out/*.iso
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: /tmp/auto-ins/out/*.iso
