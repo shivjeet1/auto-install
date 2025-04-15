@@ -71,13 +71,16 @@ echo "Mounting efi"
 #   echo "Mounting swap"
 #   swapon $swap_part
 # fi
-reflector
+
 pacman-key --init
 pacman -Sy --noconfirm archlinux-keyring jq
 
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+reflector -c "India" --sort=rate > /etc/pacman.d/mirrorlist
+
 echo "Installing packages."
 pacstrap /mnt base linux linux-firmware grub git efibootmgr neovim networkmanager sudo \
-  base-devel git ufw vnstat cmake fzf man-db man-pages unzip openssh
+  base-devel git ufw vnstat cmake fzf man-db man-pages unzip openssh || (cp /etc/pacman.d/mirrorlist.bak /etc/pacman.d/mirrorlist; bash arch.sh)
 
 
 echo "Generating fstab and storing it."
