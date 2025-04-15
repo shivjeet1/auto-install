@@ -29,7 +29,13 @@ Eg.
 ```
 #### NOTE: adduser can be only set to `y/n` indicating whether to add a normal user or not. If not willing to add user then leave `username` and `password` blank.
 
-- Do not forget to add root password
+- Do not forget to add root password in `config.json`
+
+- Next create a git tag
+`git tag autoins.lolconfig`
+`lolconfig` can be different in your case keep it as you like but do not change the `autoins.` part.
+
+- Now the 
 
 - Simply add, commit and push to the repository.
 
