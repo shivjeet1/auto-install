@@ -1,5 +1,4 @@
 ## Auto-Install
----
 Project **Auto-Install** aim to create an ISO image for easy **unattended installation** of [archlinux](https://archlinux.org)
 
 This project creates ISO image which is suitable for installation in cloud environment and environments requiring unattended installation.
