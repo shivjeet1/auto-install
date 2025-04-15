@@ -5,7 +5,7 @@ on:
     branches:
       - master
     tags:
-      - "v*.*.*"
+      - "autoins.*"
     paths-ignore:
       - "**.md"
       - ".github/**"
