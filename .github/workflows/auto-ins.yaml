@@ -1,0 +1,25 @@
+name: build arch iso for unattended installation
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux/archlinux:latest
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v4
+      - run: pwd
+      - run: find .
+      - run: cat /etc/os-release
+      - run: pacman-key --init
+      - run: pacman --noconfirm -Sy archlinux-keyring
+      - run: bash buildiso.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unattended arch installation iso
+          path: /tmp/auto-ins/out/*.iso
