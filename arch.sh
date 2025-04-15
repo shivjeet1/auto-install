@@ -72,7 +72,7 @@ echo "Mounting efi"
 #   swapon $swap_part
 # fi
 
-pacman-key --init
+# pacman-key --init
 pacman -Sy --noconfirm archlinux-keyring jq
 
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
