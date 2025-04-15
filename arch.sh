@@ -80,7 +80,7 @@ reflector -c "India" --sort=rate > /etc/pacman.d/mirrorlist
 
 echo "Installing packages."
 pacstrap /mnt base linux linux-firmware grub git efibootmgr neovim networkmanager sudo \
-  base-devel git ufw vnstat cmake fzf man-db man-pages unzip openssh || (cp /etc/pacman.d/mirrorlist.bak /etc/pacman.d/mirrorlist; bash arch.sh)
+  base-devel git ufw vnstat cmake fzf man-db man-pages unzip openssh 
 
 
 echo "Generating fstab and storing it."
