@@ -15,6 +15,7 @@ This project creates ISO image which is suitable for installation in cloud envir
     - Or else fork it.
 
 - Put the user credentials and hostname in the `config.json` file.
+
 Eg.
 ```json
 {
@@ -27,17 +28,23 @@ Eg.
         }
 }
 ```
-#### NOTE: adduser can be only set to `y/n` indicating whether to add a normal user or not. If not willing to add user then leave `username` and `password` blank.
+**NOTE: adduser can be only set to `y/n` indicating whether to add a normal user or not. If not willing to add user then leave `username` and `password` blank.**
 
 - Do not forget to add root password in `config.json`
 
 - Next create a git tag
+
 `git tag autoins.lolconfig`
+
 `lolconfig` can be different in your case keep it as you like but do not change the `autoins.` part.
 
-- Now the 
+- Now push the just created git tag.
 
-- Simply add, commit and push to the repository.
+`git push origin autoins.lolconfig`
+
+**NOTE: By using git tag you can have your custom unattended installation iso in releases section for easy download**
+
+- Simply add, commit and push `config.json`
 
 ---
 
