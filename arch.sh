@@ -131,7 +131,7 @@ then
   arch-chroot /mnt bash -c "echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo"
 fi
 
-arch-chroot /mnt sed s/Required\ DatabaseOptional/Never/ /etc/pacman.conf
+arch-chroot /mnt sed -i s/Required\ DatabaseOptional/Never/ /etc/pacman.conf
 
 arch-chroot /mnt systemctl enable NetworkManager 
 
