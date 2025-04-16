@@ -14,7 +14,9 @@ pacman --noconfirm -S archiso
 
 cp -r /usr/share/archiso/configs/releng/* $work_dir/.
 
-echo -e "jq\narchlinux-keyring" >> $work_dir/packages.x86_64
+echo -e "jq" >> $work_dir/packages.x86_64
+
+sed s/Required\ DatabaseOptional/Never/ -i $work_dir/pacman.conf
 
 cp -r arch.sh config.json $work_dir/airootfs/root/.
 
