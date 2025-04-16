@@ -72,6 +72,10 @@ echo "Mounting efi"
 #   swapon $swap_part
 # fi
 
+# To avoid invalid signature (keyring) error
+timedatectl set-ntp true
+hwclock --systohc
+
 pacman-key --init
 pacman -Syy --noconfirm archlinux-keyring jq
 
