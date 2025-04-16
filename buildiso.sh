@@ -12,6 +12,8 @@ mkdir -p $iso_out
 # Setup
 pacman --noconfirm -S archiso
 
+echo -e "jq\narchlinux-keyring" >> $work_dir/packages.x86_64
+
 cp -r /usr/share/archiso/configs/releng/* $work_dir/.
 
 cp -r arch.sh config.json $work_dir/airootfs/root/.

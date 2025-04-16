@@ -77,7 +77,7 @@ timedatectl set-ntp true
 hwclock --systohc
 
 pacman-key --init
-pacman -Syy --noconfirm archlinux-keyring jq
+pacman -Syy --noconfirm archlinux-keyring
 
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "India" --sort=rate > /etc/pacman.d/mirrorlist
