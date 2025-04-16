@@ -2,8 +2,6 @@ name: build arch iso for unattended installation
 
 on:
   push:
-    branches:
-      - master
     tags:
       - "autoins.*"
     paths-ignore:
