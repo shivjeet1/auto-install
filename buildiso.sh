@@ -14,9 +14,12 @@ pacman --noconfirm -S archiso
 
 cp -r /usr/share/archiso/configs/releng/* $work_dir/.
 
-echo -e "jq" >> $work_dir/packages.x86_64
+echo "jq" >> $work_dir/packages.x86_64
 
-sed s/Required\ DatabaseOptional/Never/ $work_dir/pacman.conf > $work_dir/airootfs/etc/pacman.conf
+# sed s/Required\ DatabaseOptional/Never/ $work_dir/pacman.conf > $work_dir/airootfs/etc/pacman.conf
+
+mkdir -p $work_dir/airootfs/usr/share/pacman/keyrings
+cp /usr/share/keyrings/* $work_dir/airootfs/usr/share/pacman/keyrings/.
 
 cp -r arch.sh config.json $work_dir/airootfs/root/.
 
