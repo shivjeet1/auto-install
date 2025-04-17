@@ -16,10 +16,6 @@ cp -r /usr/share/archiso/configs/releng/* $work_dir/.
 
 echo "jq" >> $work_dir/packages.x86_64
 
-# sed s/Required\ DatabaseOptional/Never/ $work_dir/pacman.conf > $work_dir/airootfs/etc/pacman.conf
-
-cp -r /etc/pacman.d/gnupg $work_dir/airootfs/etc/pacman.d/.
-
 cp -r arch.sh config.json $work_dir/airootfs/root/.
 
 cat >> $work_dir/airootfs/root/.zprofile << EOF
