@@ -29,7 +29,7 @@ jobs:
       - run: bash buildiso.sh
       - run: mount -o loop /tmp/auto-ins/*.iso /mnt 
       - run: unsquashfs /mnt/arch/x86_64/airootfs.sfs 
-      - run: diff /usr/share/pacman/keyrings/* squashfs_root/usr/share/pacman/keyrings/*
+      - run: diff /etc/pacman.d/gnupg/* squashfs_root/etc/pacman.d/gnupg/*
       # - uses: actions/upload-artifact@v4
       #   with:
       #     name: unattended arch installation iso
