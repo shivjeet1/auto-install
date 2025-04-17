@@ -76,8 +76,8 @@ echo "Mounting efi"
 timedatectl set-ntp true
 hwclock --systohc
 
-pacman-key --init
-pacman -Sy --noconfirm archlinux-keyring
+# pacman-key --init
+# pacman -Sy --noconfirm archlinux-keyring
 
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "India" --sort=rate > /etc/pacman.d/mirrorlist
