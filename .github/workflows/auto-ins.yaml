@@ -2,12 +2,14 @@ name: build arch iso for unattended installation
 
 on:
   push:
-    tags:
-      - "autoins.*"
-    paths-ignore:
-      - "**.md"
-      - ".github/**"
-      - "**.sh"
+    branches:
+      master
+    # tags:
+    #   - "autoins.*"
+    # paths-ignore:
+    #   - "**.md"
+    #   - ".github/**"
+    #   - "**.sh"
 
 jobs:
   build:
@@ -23,12 +25,15 @@ jobs:
       - run: find .
       - run: cat /etc/os-release
       - run: pacman-key --init
-      - run: pacman --noconfirm -Sy archlinux-keyring
+      - run: pacman --noconfirm -Sy archlinux-keyring squashfs-tools
       - run: bash buildiso.sh
-      - uses: actions/upload-artifact@v4
-        with:
-          name: unattended arch installation iso
-          path: /tmp/auto-ins/out/*.iso
+      - run: mount -o loop /tmp/auto-ins/*.iso /mnt 
+      - run: unsquashfs /mnt/arch/x86_64/airootfs.sfs 
+      - run: diff /usr/share/pacman/keyrings/* squashfs_root/usr/share/pacman/keyrings/*
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: unattended arch installation iso
+      #     path: /tmp/auto-ins/out/*.iso
       - uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
