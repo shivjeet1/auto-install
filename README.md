@@ -8,7 +8,7 @@ The system installed by the **custom ISO image** obtained from this repository's
 
 Anyone can have their own custom ISO image for unattended installation of Archlinux just by following further instructions.
 
-***Further work to provide the complete customized ISO of Archlinux will be carried out.***
+**Announcement**: ***Further work to provide the complete customized ISO of Archlinux will be carried out.***
 
 ---
 
@@ -89,9 +89,3 @@ This file puts `arch.sh` and `config.sh` to custom ISO so these files are availa
 
 - [0xguava](https://0xgauva.github.io/)
 - [shivjeet1](https://shivjeet1.github.io)
-
----
-
-### Announcement
-
-***Further work to provide the complete customized ISO of Archlinux will be carried out.***
