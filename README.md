@@ -8,7 +8,9 @@ The system installed by the **custom ISO image** obtained from this repository's
 
 Anyone can have their own custom ISO image for unattended installation of Archlinux just by following further instructions.
 
->> **Announcement**: ***Further work to provide the complete customized ISO of Archlinux will be carried out.*** 
+---
+
+**Announcement**: ***Further work to provide the complete customized ISO of Archlinux will be carried out.*** 
 
 ---
 
