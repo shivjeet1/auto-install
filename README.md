@@ -32,6 +32,8 @@ Eg.
 
 - Do not forget to add root password in `config.json`
 
+- Simply add, commit and push `config.json`
+
 - Next create a git tag
 
 `git tag autoins.lolconfig`
@@ -43,8 +45,6 @@ Eg.
 `git push origin autoins.lolconfig`
 
 **NOTE: By using git tag you can have your custom unattended installation iso in releases section for easy download**
-
-- Simply add, commit and push `config.json`
 
 Once workflow is done you can have your **custom unattended installation iso** in releases.
 
