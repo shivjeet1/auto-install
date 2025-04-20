@@ -1,20 +1,20 @@
 ## Auto-Install
-Project **Auto-Install** aim to create an ISO image for easy **unattended installation** of [archlinux](https://archlinux.org)
+**Auto-Install** is a project which aims to create a custom ISO image for easy **unattended installation** of the mighty [Archlinux](https://archlinux.org)
 
-This project creates ISO image which is suitable for installation in cloud environment and environments requiring unattended installation.
+This project creates ISO image which is suitable for installation in cloud environment and environments requiring unattended installation. The ISO does not use cloud-init, netboot and etc.
 
 ---
 
 ### Usage
-- Fork this repo or clone it.
-    - If cloning
+- **Fork** or **Clone** this repo:
+    - For cloning:
     ```bash
     git clone https://github.com/0xguava/auto-install.git
     cd auto-install
     ```
-    - Or else fork it.
+    - Or else fork it and clone the fork.
 
-- Put the user credentials and hostname in the `config.json` file.
+- **Setting up configuration:** Put the hostname and user credentials in the `config.json` file.
 
 Eg.
 ```json
@@ -28,30 +28,37 @@ Eg.
     }
 }
 ```
-**NOTE: adduser can be only set to `y/n` indicating whether to add a normal user or not. If not willing to add user then leave `username` and `password` blank.**
+> **NOTE**: adduser can be only set to `y/n` indicating whether to add a normal user or not.
+> - If want to add normal user then set `"adduser": "y"` and set `username` and `password` of your choice.
+> - If do not want to add user then either set `"adduser": "no"` or leave all concerned fields empty.
 
-- Do not forget to add root password in `config.json`
+- **IMP**: Do not forget to add `rootpassword` in `config.json`
 
-- Simply add, commit and push `config.json`
+- **Add**, **commit** and **push** `config.json` to your repository:
+```bash
+git add config.json
+git commit -m 'commit message.'
+git push origin master
+```
+> **NOTE**: If directly cloning this repo, then you have to set the `origin` to you own repo.
+> - Create your a new repo on your github account.
+> - Set the `origin`: 
+>```bash
+>git remote set-url origin <url to your repo> 
+>```
 
-- Next create a git tag
+- Create and push **tag**:
+```bash
+git tag autoins.lolconfig
+git push origin autoins.lolconfig
 
-`git tag autoins.lolconfig`
+```
+> `lolconfig` can be different in your case. Keep it as you like but do not change the `autoins.` part.
 
-`lolconfig` can be different in your case keep it as you like but do not change the `autoins.` part.
-
-- Now push the just created git tag.
-
-`git push origin autoins.lolconfig`
-
-**NOTE: By using git tag you can have your custom unattended installation iso in releases section for easy download**
-
-Once workflow is done you can have your **custom unattended installation iso** in releases.
+Once workflow is done then you can have your **custom unattended installation iso** with configurations from `config.json` in releases.
 
 ---
 
 ### Contributer
 - [0xguava](https://0xgauva.github.io/)
 - [shivjeet1](https://shivjeet1.github.io)
-
-
