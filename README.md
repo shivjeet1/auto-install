@@ -40,7 +40,7 @@ Anyone can have their own custom ISO image for unattended installation of Archli
     ```
     > **NOTE**: adduser can be only set to `y/n` indicating whether to add a normal user or not.
     > - If want to add normal user then set `"adduser": "y"` and set `username` and `password` of your choice.
-    > - If do not want to add user then either set `"adduser": "no"` or leave all concerned fields empty.
+    > - If do not want to add user then either set `"adduser": "n"` or leave all concerned fields empty.
 
 - **IMP**: Do not forget to add `rootpassword` in `config.json`
 
