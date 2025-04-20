@@ -5,9 +5,10 @@ This project creates ISO image which is suitable for installation in cloud envir
 ISO creation takes place via Github Workflow.
 
 The system installed by the **custom ISO image** obtained from this repository's releases will be minimal with enough packages required to run the system.
-Further work to provide the complete customized ISO of Archlinux will be carried out.
 
 Anyone can have their own custom ISO image for unattended installation of Archlinux just by following further instructions.
+
+***Further work to provide the complete customized ISO of Archlinux will be carried out.***
 
 ---
 
@@ -86,3 +87,9 @@ This file puts `arch.sh` and `config.sh` to custom ISO so these files are availa
 
 - [0xguava](https://0xgauva.github.io/)
 - [shivjeet1](https://shivjeet1.github.io)
+
+---
+
+### Announcement
+
+***Further work to provide the complete customized ISO of Archlinux will be carried out.***
