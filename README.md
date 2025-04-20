@@ -81,6 +81,8 @@ This file puts `arch.sh` and `config.sh` to custom ISO so these files are availa
 
 - `config.json`: It's the configuration file, which contains user configuration and other basic info. 
 
+- `README.md`: This file contains what you are reading right now.
+
 ---
 
 ### Contributers
