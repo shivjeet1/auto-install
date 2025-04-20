@@ -8,26 +8,26 @@ This project creates ISO image which is suitable for installation in cloud envir
 ### Usage
 - **Fork** or **Clone** this repo:
     - For cloning:
-    ```bash
-    git clone https://github.com/0xguava/auto-install.git
-    cd auto-install
-    ```
+        ```bash
+        git clone https://github.com/0xguava/auto-install.git
+        cd auto-install
+        ```
     - Or else fork it and clone the fork.
 
 - **Setting up configuration:** Put the hostname and user credentials in the `config.json` file.
 
-Eg.
-```json
-{
-    "hostname": "arch",
-    "adduser": "y",
-    "credentials": {
-        "username": "lol",
-        "password": "lol",
-        "rootpassword": "lol"
+    Eg.
+    ```json
+    {
+        "hostname": "arch",
+        "adduser": "y",
+        "credentials": {
+            "username": "lol",
+            "password": "lol",
+            "rootpassword": "lol"
+        }
     }
-}
-```
+    ```
 > **NOTE**: adduser can be only set to `y/n` indicating whether to add a normal user or not.
 > - If want to add normal user then set `"adduser": "y"` and set `username` and `password` of your choice.
 > - If do not want to add user then either set `"adduser": "no"` or leave all concerned fields empty.
