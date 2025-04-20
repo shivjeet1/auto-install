@@ -19,13 +19,13 @@ This project creates ISO image which is suitable for installation in cloud envir
 Eg.
 ```json
 {
-        "hostname": "arch",
-        "adduser": "y",
-        "credentials": {
-                "username": "lol",
-                "password": "lol",
-                "rootpassword": "lol"
-        }
+    "hostname": "arch",
+    "adduser": "y",
+    "credentials": {
+        "username": "lol",
+        "password": "lol",
+        "rootpassword": "lol"
+    }
 }
 ```
 **NOTE: adduser can be only set to `y/n` indicating whether to add a normal user or not. If not willing to add user then leave `username` and `password` blank.**
