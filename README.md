@@ -33,9 +33,9 @@ Anyone can have their own custom ISO image for unattended installation of Archli
         "hostname": "arch",
         "adduser": "y",
         "credentials": {
-            "username": "lol",
-            "password": "lol",
-            "rootpassword": "lol"
+            "username": "user",
+            "password": "vihs",
+            "rootpassword": "vihs"
         }
     }
     ```
