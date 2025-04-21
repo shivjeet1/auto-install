@@ -1,4 +1,5 @@
 ## Auto-Install
+
 **Auto-Install** is a project which aims to create a custom ISO image for easy **unattended installation** of the mighty [Archlinux](https://archlinux.org).
 
 This project creates ISO image which is suitable for installation in cloud environment and environments requiring unattended installation. The ISO does not use cloud-init, netboot and etc.
@@ -84,6 +85,8 @@ This file puts `arch.sh` and `config.sh` to custom ISO so these files are availa
 - `config.json`: It's the configuration file, which contains user configuration and other basic info. 
 
 - `README.md`: This file contains what you are reading right now.
+
+Workflow is triggered when a `tag` is pushed and then then whole thing is done and managed in workflow.
 
 ---
 
