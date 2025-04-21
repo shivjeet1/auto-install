@@ -86,7 +86,7 @@ This file puts `arch.sh` and `config.sh` to custom ISO so these files are availa
 
 - `README.md`: This file contains what you are reading right now.
 
-Workflow is triggered when a `tag` is pushed and then then whole thing is done and managed in workflow.
+Workflow is triggered when a `tag` is pushed and then the whole thing is done and managed in workflow.
 
 ---
 
