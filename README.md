@@ -73,7 +73,7 @@ Once workflow is done then you can have your **custom unattended installation IS
 
 This repository contains in total five files.
 
-- `arch.sh`: This the most important file as the whole installation within the live ISO environment is carried out by this file.
+- `arch.sh`: This is the most important file as the whole installation within the live ISO environment is carried out by this file.
 This the installation script which is already present in the live ISO env.
 
 - **Workflow file**: This file runs the github workflow, which is responsible for creating custom ISO and uploading it to **Repo's Releases**.
