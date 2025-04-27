@@ -90,16 +90,16 @@ Workflow is triggered when a `tag` is pushed and then the whole thing is done an
 
 ---
 
+### Demonstration Video
+
+https://github.com/user-attachments/assets/81611158-3fe2-4cf9-bbdb-f9ae7d456a17
+
+---
+
 ### Contributers
 
 - [0xguava](https://0xgauva.github.io/)
 - [shivjeet1](https://shivjeet1.github.io)
-
----
-
-### Demonstration Video
-
-https://github.com/user-attachments/assets/81611158-3fe2-4cf9-bbdb-f9ae7d456a17
 
 ---
 
