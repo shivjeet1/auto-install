@@ -98,7 +98,7 @@ Workflow is triggered when a `tag` is pushed and then the whole thing is done an
 ---
 
 ### Demonstration Video
-https://github.com/shivjeet1/auto-install/raw/refs/heads/master/demo.mkv
+![](https://github.com/shivjeet1/auto-install/raw/refs/heads/master/demo.mkv)
 
 ---
 
