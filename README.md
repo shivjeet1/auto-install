@@ -98,7 +98,7 @@ Workflow is triggered when a `tag` is pushed and then the whole thing is done an
 ---
 
 ### Demonstration Video
-![](/demo.mkv)
+![](demo.mkv)
 
 ---
 
