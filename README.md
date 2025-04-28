@@ -52,7 +52,7 @@ Anyone can have their own custom ISO image for unattended installation of Archli
     git push origin master
     ```
     > **NOTE**: If directly cloning this repo, then you have to set the `origin` to you own repo.
-    > - Create your a new repo on your github account.
+    > - Create a new repo on your github account.
     > - Set the `origin`: 
     >    ```bash
     >    git remote set-url origin <url to your repo> 
@@ -80,7 +80,7 @@ This the installation script which is already present in the live ISO env.
 Basically this file manages the workflow of Github's CI/CD for this project.
 
 - `buildiso.sh`: This file contains all the instructions for customizing the live ISO env and is responsible for creating a custom ISO image.
-This file puts `arch.sh` and `config.sh` to custom ISO so these files are available in live ISO env. It's executed by `worflow file`.
+This file puts `arch.sh` and `config.sh` to custom ISO so these files are available in live ISO env. It's executed by `workflow file`.
 
 - `config.json`: It's the configuration file, which contains user configuration and other basic info. 
 
@@ -96,9 +96,9 @@ https://github.com/user-attachments/assets/81611158-3fe2-4cf9-bbdb-f9ae7d456a17
 
 ---
 
-### Contributers
+### Contributors
 
-- [0xguava](https://0xgauva.github.io/)
+- [0xguava](https://0xguava.github.io/)
 - [shivjeet1](https://shivjeet1.github.io)
 
 ---
