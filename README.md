@@ -7,7 +7,7 @@ ISO creation takes place via Github Workflow.
 
 The system installed by the **custom ISO image** obtained from this repository's releases will be minimal with enough packages required to run the system.
 
-Anyone can have their own custom ISO image for unattended installation of Archlinux just by following further instructions.
+Anyone can generate their own custom ISO image for unattended installation of Archlinux just by following further instructions.
 
 ---
 
