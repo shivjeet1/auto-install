@@ -34,8 +34,8 @@ Anyone can generate their own custom ISO image for unattended installation of Ar
         "adduser": "y",
         "credentials": {
             "username": "user",
-            "password": "vihs",
-            "rootpassword": "vihs"
+            "password": "resu",
+            "rootpassword": "toor"
         }
     }
     ```
